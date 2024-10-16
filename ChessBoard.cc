@@ -10,12 +10,12 @@ using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol)
     : numRows(numRow), numCols(numCol),
-      board(numRows, std::vector<ChessPiece *>(numCol, nullptr)) {
-  // for (auto row : board) {
-  //   for (auto col : row) {
-  //     col = new ChessPiece();
-  //   }
-  // }
+      board(numRows, std::vector<ChessPiece *>(numCol)) {
+  for (auto row : board) {
+    for (auto col : row) {
+      col = nullptr;
+    }
+  }
 }
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow,

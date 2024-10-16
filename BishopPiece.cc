@@ -11,9 +11,9 @@ bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
 const char *BishopPiece::toString() {
   std::stringstream output;
   if (m_color == Color::Black) {
-    output << "\u2657" << getColChar() << getRowChar();
+    output << "\u2657";
   } else {
-    output << "\u265D" << getColChar() << getRowChar();
+    output << "\u265D";
   }
   std::strcpy(m_stringBuffer, output.str().c_str());
   return m_stringBuffer;
