@@ -1,4 +1,5 @@
 #include "BishopPiece.hh"
+#include <cstring>
 #include <sstream>
 
 namespace Student {

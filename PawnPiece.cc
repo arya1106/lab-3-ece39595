@@ -1,6 +1,7 @@
 #include "PawnPiece.hh"
 #include "ChessBoard.hh"
 #include "ChessPiece.hh"
+#include <cstring>
 #include <sstream>
 
 namespace Student {
