@@ -1,6 +1,9 @@
 #include "ChessPiece.hh"
 namespace Student {
 
+ChessPiece::ChessPiece(ChessBoard &board, Color color, int row, int column)
+    : m_board(board), m_color(color), m_row(row), m_column(column) {}
+
 Color ChessPiece::getColor() { return m_color; }
 
 Type ChessPiece::getType() { return m_type; }

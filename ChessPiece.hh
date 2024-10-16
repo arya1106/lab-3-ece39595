@@ -8,8 +8,8 @@ class ChessBoard;
 
 class ChessPiece {
 protected:
-  Color m_color;
   ChessBoard &m_board;
+  Color m_color;
   Type m_type;
   int m_row, m_column;
   char m_stringBuffer[5];

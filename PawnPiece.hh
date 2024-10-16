@@ -9,6 +9,10 @@
  */
 namespace Student {
 class PawnPiece : public ChessPiece {
+private:
+  bool canDoubleMove = false;
+
+public:
   bool canMoveToLocation(int toRow, int toColumn);
   const char *toString();
 };
