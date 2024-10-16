@@ -7,11 +7,11 @@
  * Student implementation of a Rook chess piece.
  * The class is defined within the Student namespace.
  */
-namespace Student
-{
-    class RookPiece : public ChessPiece
-    {
-    };
-}
+namespace Student {
+class RookPiece : public ChessPiece {
+  bool canMoveToLocation(int toRow, int toColumn);
+  const char *toString();
+};
+} // namespace Student
 
 #endif
