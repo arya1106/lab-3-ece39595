@@ -10,7 +10,7 @@ bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
 
 const char *BishopPiece::toString() {
   std::stringstream output;
-  if (m_color == Color::Black) {
+  if (m_color == Color::White) {
     output << "\u2657";
   } else {
     output << "\u265D";

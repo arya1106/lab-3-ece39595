@@ -40,7 +40,7 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
 
 const char *PawnPiece::toString() {
   std::stringstream output;
-  if (m_color == Color::Black) {
+  if (m_color == Color::White) {
     output << "\u2659";
   } else {
     output << "\u265F";

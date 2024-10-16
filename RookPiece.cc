@@ -9,7 +9,7 @@ bool RookPiece::canMoveToLocation(int toRow, int toColumn) {
 
 const char *RookPiece::toString() {
   std::stringstream output;
-  if (m_color == Color::Black) {
+  if (m_color == Color::White) {
     output << "\u2656";
   } else {
     output << "\u265C";
