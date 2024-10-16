@@ -1,10 +1,69 @@
 #include "ChessBoard.hh"
 #include "BishopPiece.hh"
+#include "Chess.h"
+#include "ChessPiece.hh"
 #include "KingPiece.hh"
 #include "PawnPiece.hh"
 #include "RookPiece.hh"
 
 using Student::ChessBoard;
+
+ChessBoard::ChessBoard(int numRow, int numCol)
+    : numRows(numRow), numCols(numCol),
+      board(numRows, std::vector<ChessPiece *>(numCol, nullptr)) {
+  // for (auto row : board) {
+  //   for (auto col : row) {
+  //     col = new ChessPiece();
+  //   }
+  // }
+}
+
+void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
+                                  int startColumn) {
+  switch (ty) {
+  case Pawn:
+    board.at(startRow).at(startColumn) =
+        new PawnPiece(*this, col, startRow, startColumn);
+    break;
+  case Bishop:
+    board.at(startRow).at(startColumn) =
+        new BishopPiece(*this, col, startRow, startColumn);
+    break;
+  case Rook:
+    board.at(startRow).at(startColumn) =
+        new RookPiece(*this, col, startRow, startColumn);
+    break;
+  case King:
+    // board.at(startRow).at(startColumn) =
+    // new KingPiece(*this, col, startRow, startColumn);
+    break;
+  }
+}
+
+bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
+                           int toColumn) {
+  return true;
+}
+
+bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow,
+                             int toColumn) {
+  ChessPiece *fromPiece = getPiece(fromRow, fromColumn);
+  ChessPiece *toPiece = getPiece(toRow, toColumn);
+
+  if (toPiece && (toPiece->getType() == Type::Pawn)) {
+    // special case for pawn attacking
+    ((PawnPiece *)toPiece)->attacking = true;
+    return fromPiece->canMoveToLocation(toRow, toColumn);
+  } else if (toPiece) {
+    // check to make sure you're not attacking your own pieces
+    return (!(toPiece->getColor() == fromPiece->getColor())) &&
+           (fromPiece->canMoveToLocation(toRow, toColumn));
+  } else {
+    return fromPiece->canMoveToLocation(toRow, toColumn);
+  }
+}
+
+bool ChessBoard::isPieceUnderThreat(int row, int column) { return false; }
 
 std::ostringstream ChessBoard::displayBoard() {
   std::ostringstream outputString;

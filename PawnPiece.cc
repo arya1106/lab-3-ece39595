@@ -1,8 +1,10 @@
 #include "PawnPiece.hh"
 #include "ChessBoard.hh"
+#include "ChessPiece.hh"
 #include <sstream>
 
 namespace Student {
+
 bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
   bool canDoubleMove =
       (m_color == Color::Black && m_row == 1) ||
@@ -14,6 +16,7 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
       return toColumn == m_column && (toRow == m_row - 2 || toRow == m_row - 1);
     }
   }
+
   bool nonAttackValidWhite = toColumn == m_column && toRow == m_row - 1;
   bool nonAttackValidBlack = toColumn == m_column && toRow == m_row + 1;
   bool attackValidWhite =
@@ -24,9 +27,13 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
       toRow == m_row + 1;
 
   if (m_color == Color::Black) {
-    return attackValidBlack || nonAttackValidBlack;
+    bool out = (attacking && attackValidBlack) || nonAttackValidBlack;
+    attacking = false;
+    return out;
   } else {
-    return attackValidWhite || nonAttackValidWhite;
+    bool out = (attacking && attackValidWhite) || nonAttackValidWhite;
+    attacking = false;
+    return out;
   }
 };
 

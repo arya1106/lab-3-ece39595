@@ -1,2 +1,4 @@
 .cache/
 compile_commands.json
+chess.dSYM/
+chess

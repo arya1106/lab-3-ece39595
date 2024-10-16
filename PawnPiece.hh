@@ -9,8 +9,13 @@
  */
 namespace Student {
 class PawnPiece : public ChessPiece {
-private:
-  bool canDoubleMove = false;
+
+public:
+  PawnPiece(ChessBoard &board, Color color, int row, int column)
+      : ChessPiece(board, color, row, column) {}
+
+public:
+  bool attacking = false;
 
 public:
   bool canMoveToLocation(int toRow, int toColumn);
