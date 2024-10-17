@@ -20,9 +20,13 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
   }
   if (canDoubleMove) {
     if (m_color == Color::Black) {
-      return toColumn == m_column && (toRow == m_row + 2 || toRow == m_row + 1);
+      bool validMove =
+          toColumn == m_column && (toRow == m_row + 2 || toRow == m_row + 1);
+      return validMove && toPiece == nullptr;
     } else {
-      return toColumn == m_column && (toRow == m_row - 2 || toRow == m_row - 1);
+      bool validMove =
+          toColumn == m_column && (toRow == m_row - 2 || toRow == m_row - 1);
+      return validMove && toPiece == nullptr;
     }
   }
 
