@@ -22,7 +22,7 @@ bool RookPiece::canMoveToLocation(int toRow, int toColumn) {
         }
       }
     } else {
-      for (int colToCheck = m_column - 1; colToCheck < toColumn; colToCheck--) {
+      for (int colToCheck = m_column - 1; colToCheck > toColumn; colToCheck--) {
         if (m_board.getPiece(m_row, colToCheck)) {
           return false;
         }

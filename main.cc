@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sys/signal.h>
 
-void isValidScan(Student::ChessBoard &board) {
+void isValidScanS(Student::ChessBoard &board) {
   for (int i = 0; i < board.getNumRows(); i++) {
     for (int j = 0; j < board.getNumCols(); j++) {
       Student::ChessPiece *piece = board.getPiece(i, j);
@@ -43,7 +43,7 @@ void test_part1_4x4_1() {
   // Calls isValidMove() from every position to every
   // other position on the chess board for all pieces.
   std::cout << sBoard.displayBoard().str() << std::endl;
-  isValidScan(sBoard);
+  isValidScanS(sBoard);
 
   return;
 }
@@ -58,7 +58,7 @@ void test_part_4x4_3() {
   // Calls isValidMove() from every position to every
   // other position on the chess board for all pieces.
   std::cout << sBoard.displayBoard().str() << std::endl;
-  isValidScan(sBoard);
+  isValidScanS(sBoard);
 }
 
 void test_part_4x4_5() {
@@ -70,12 +70,29 @@ void test_part_4x4_5() {
   // Calls isValidMove() from every position to every
   // other position on the chess board for all pieces.
   std::cout << sBoard.displayBoard().str() << std::endl;
-  isValidScan(sBoard);
+  isValidScanS(sBoard);
+}
+
+void test_part_6x6_2() {
+
+  Student::ChessBoard sBoard(6, 6);
+  sBoard.createChessPiece(Black, Rook, 2, 2);
+  sBoard.createChessPiece(White, Bishop, 1, 1);
+  sBoard.createChessPiece(White, Bishop, 0, 0);
+  sBoard.createChessPiece(White, Rook, 1, 4);
+  sBoard.createChessPiece(White, Pawn, 3, 3);
+  sBoard.createChessPiece(Black, Pawn, 2, 1);
+
+  // Calls isValidMove() from every position to every
+  // other position on the chess board for all pieces.
+  std::cout << sBoard.displayBoard().str() << std::endl;
+  isValidScanS(sBoard);
 }
 
 int main() {
   // test_part1_4x4_1();
   // test_part_4x4_3();
-  test_part_4x4_5();
+  // test_part_4x4_5();
+  test_part_6x6_2();
   return EXIT_SUCCESS;
 }
