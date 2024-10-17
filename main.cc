@@ -17,18 +17,14 @@ void test_part1_4x4_1() {
 
   // Corresponding code
   Student::ChessBoard sBoard(4, 4);
-  std::cout << sBoard.displayBoard().str();
   sBoard.createChessPiece(White, Rook, 3, 2);
-  std::cout << sBoard.displayBoard().str();
   sBoard.createChessPiece(Black, Bishop, 1, 3);
-  std::cout << sBoard.displayBoard().str();
   sBoard.createChessPiece(Black, Rook, 1, 1);
-  std::cout << sBoard.displayBoard().str();
   sBoard.createChessPiece(White, Rook, 2, 3);
-  std::cout << sBoard.displayBoard().str();
 
   // Calls isValidMove() from every position to every
   // other position on the chess board for all pieces.
+  std::cout << sBoard.displayBoard().str();
 
   return;
 }

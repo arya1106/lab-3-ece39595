@@ -1,6 +1,7 @@
 #ifndef __BISHOPPIECE_H__
 #define __BISHOPPIECE_H__
 
+#include "Chess.h"
 #include "ChessPiece.hh"
 
 /**
@@ -11,7 +12,9 @@ namespace Student {
 class BishopPiece : public ChessPiece {
 public:
   BishopPiece(ChessBoard &board, Color color, int row, int column)
-      : ChessPiece(board, color, row, column) {}
+      : ChessPiece(board, color, row, column) {
+    m_type = Type::Bishop;
+  }
   bool canMoveToLocation(int toRow, int toColumn);
   const char *toString();
 };

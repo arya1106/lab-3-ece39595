@@ -12,7 +12,9 @@ class PawnPiece : public ChessPiece {
 
 public:
   PawnPiece(ChessBoard &board, Color color, int row, int column)
-      : ChessPiece(board, color, row, column) {}
+      : ChessPiece(board, color, row, column) {
+    m_type = Type::Pawn;
+  }
 
 public:
   bool attacking = false;

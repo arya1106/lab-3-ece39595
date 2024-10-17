@@ -1,6 +1,7 @@
 #ifndef _ROOKPIECE_H__
 #define _ROOKPIECE_H__
 
+#include "Chess.h"
 #include "ChessPiece.hh"
 
 /**
@@ -11,7 +12,9 @@ namespace Student {
 class RookPiece : public ChessPiece {
 public:
   RookPiece(ChessBoard &board, Color color, int row, int column)
-      : ChessPiece(board, color, row, column) {}
+      : ChessPiece(board, color, row, column) {
+    m_type = Type::Rook;
+  }
   bool canMoveToLocation(int toRow, int toColumn);
   const char *toString();
 };

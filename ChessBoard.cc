@@ -10,13 +10,7 @@ using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol)
     : numRows(numRow), numCols(numCol),
-      board(numRows, std::vector<ChessPiece *>(numCol)) {
-  for (auto row : board) {
-    for (auto col : row) {
-      col = nullptr;
-    }
-  }
-}
+      board(numRows, std::vector<ChessPiece *>(numCol, nullptr)) {}
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
                                   int startColumn) {
@@ -34,8 +28,8 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
         new RookPiece(*this, col, startRow, startColumn);
     break;
   case King:
-    // board.at(startRow).at(startColumn) =
-    // new KingPiece(*this, col, startRow, startColumn);
+    board.at(startRow).at(startColumn) =
+        new KingPiece(*this, col, startRow, startColumn);
     break;
   }
 }
