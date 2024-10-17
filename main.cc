@@ -1,8 +1,9 @@
 #include "Chess.h"
 #include "ChessBoard.hh"
 #include "ChessPiece.hh"
-#include <assert.h>
+#include <csignal>
 #include <iostream>
+#include <sys/signal.h>
 
 void isValidScan(Student::ChessBoard &board) {
   for (int i = 0; i < board.getNumRows(); i++) {
@@ -11,6 +12,9 @@ void isValidScan(Student::ChessBoard &board) {
       if (piece) {
         for (int a = 0; a < board.getNumRows(); a++) {
           for (int b = 0; b < board.getNumCols(); b++) {
+            if (a == 1 && b == 1 && i == 2 && j == 1) {
+              raise(SIGTRAP);
+            }
             std::cout << piece->toString() << " at " << piece->getRow() << ","
                       << piece->getColumn() << " can move to " << a << "," << b
                       << ": " << piece->canMoveToLocation(a, b) << std::endl;
@@ -47,7 +51,21 @@ void test_part1_4x4_1() {
   return;
 }
 
+void test_part_4x4_3() {
+  Student::ChessBoard sBoard(4, 4);
+  sBoard.createChessPiece(White, Bishop, 2, 2);
+  sBoard.createChessPiece(White, Rook, 1, 0);
+  sBoard.createChessPiece(White, Pawn, 1, 1);
+  sBoard.createChessPiece(Black, Pawn, 0, 1);
+
+  // Calls isValidMove() from every position to every
+  // other position on the chess board for all pieces.
+  std::cout << sBoard.displayBoard().str() << std::endl;
+  isValidScan(sBoard);
+}
+
 int main() {
-  test_part1_4x4_1();
+  // test_part1_4x4_1();
+  test_part_4x4_3();
   return EXIT_SUCCESS;
 }

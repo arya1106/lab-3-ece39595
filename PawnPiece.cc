@@ -36,10 +36,12 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
       toRow == m_row + 1;
 
   if (m_color == Color::Black) {
-    bool out = (toPiece && attackValidBlack) || nonAttackValidBlack;
+    bool out =
+        (toPiece && attackValidBlack) || (!toPiece && nonAttackValidBlack);
     return out;
   } else {
-    bool out = (toPiece && attackValidWhite) || nonAttackValidWhite;
+    bool out =
+        (toPiece && attackValidWhite) || (!toPiece && nonAttackValidWhite);
     return out;
   }
 };
