@@ -10,5 +10,5 @@ custom_tests:
 valgrind:
 	valgrind --leak-check=full ./$(APP) $(TEST)
 
-test:
-	$(APP)
+test: custom_tests
+	./$(APP)

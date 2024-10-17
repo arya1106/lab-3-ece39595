@@ -9,7 +9,7 @@
 
 namespace Student {
 class ChessBoard {
-private:
+public:
   int numRows = 0;
   int numCols = 0;
   Color turn = White;

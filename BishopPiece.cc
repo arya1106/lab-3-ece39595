@@ -5,6 +5,9 @@
 namespace Student {
 
 bool BishopPiece::canMoveToLocation(int toRow, int toColumn) {
+  if (toRow == m_row && toColumn == m_column) {
+    return false;
+  }
   return std::abs(m_row - toRow) == std::abs(m_column - toColumn);
 }
 

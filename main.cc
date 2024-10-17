@@ -4,6 +4,23 @@
 #include <assert.h>
 #include <iostream>
 
+void isValidScan(Student::ChessBoard &board) {
+  for (int i = 0; i < board.getNumRows(); i++) {
+    for (int j = 0; j < board.getNumCols(); j++) {
+      Student::ChessPiece *piece = board.getPiece(i, j);
+      if (piece) {
+        for (int a = 0; a < board.getNumRows(); a++) {
+          for (int b = 0; b < board.getNumCols(); b++) {
+            std::cout << piece->toString() << " at " << piece->getRow() << ","
+                      << piece->getColumn() << " can move to " << a << "," << b
+                      << ": " << piece->canMoveToLocation(a, b) << std::endl;
+          }
+        }
+      }
+    }
+  }
+}
+
 void test_part1_4x4_1() {
   // Config file content:
   // 0
@@ -24,7 +41,8 @@ void test_part1_4x4_1() {
 
   // Calls isValidMove() from every position to every
   // other position on the chess board for all pieces.
-  std::cout << sBoard.displayBoard().str();
+  std::cout << sBoard.displayBoard().str() << std::endl;
+  isValidScan(sBoard);
 
   return;
 }
