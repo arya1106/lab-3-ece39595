@@ -1,5 +1,5 @@
 CC=g++
-C_FLAGS=-g -std=c++17 -Wall
+C_FLAGS=-g -std=c++17 -Wall -fsanitize=address,leak,undefined
 
 SRC_FILES=$(filter-out $(wildcard main.cc),$(wildcard *.cc))
 APP=chess

@@ -5,12 +5,20 @@
 #include "KingPiece.hh"
 #include "PawnPiece.hh"
 #include "RookPiece.hh"
+#include <algorithm>
+#include <vector>
 
 using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol)
     : numRows(numRow), numCols(numCol),
       board(numRows, std::vector<ChessPiece *>(numCol, nullptr)) {}
+
+ChessBoard::~ChessBoard() {
+  std::for_each(board.begin(), board.end(), [](std::vector<ChessPiece *> &row) {
+    std::for_each(row.begin(), row.end(), [](ChessPiece *ptr) { delete ptr; });
+  });
+}
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
                                   int startColumn) {
