@@ -18,15 +18,17 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     // moving horiz without attacking
     return false;
   }
-  if (canDoubleMove) {
+  if (canDoubleMove && !toPiece) {
     if (m_color == Color::Black) {
       bool validMove =
           toColumn == m_column && (toRow == m_row + 2 || toRow == m_row + 1);
-      return validMove && toPiece == nullptr;
+      bool spaceAheadFree = m_board.getPiece(m_row + 1, m_column) == nullptr;
+      return validMove && spaceAheadFree && toPiece == nullptr;
     } else {
       bool validMove =
           toColumn == m_column && (toRow == m_row - 2 || toRow == m_row - 1);
-      return validMove && toPiece == nullptr;
+      bool spaceAheadFree = m_board.getPiece(m_row - 1, m_column) == nullptr;
+      return validMove && spaceAheadFree && toPiece == nullptr;
     }
   }
 

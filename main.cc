@@ -92,7 +92,7 @@ void test_part_6x6_2() {
 int main() {
   // test_part1_4x4_1();
   // test_part_4x4_3();
-  // test_part_4x4_5();
-  test_part_6x6_2();
+  test_part_4x4_5();
+  // test_part_6x6_2();
   return EXIT_SUCCESS;
 }
