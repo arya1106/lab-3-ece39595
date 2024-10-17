@@ -10,6 +10,14 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
   bool canDoubleMove =
       (m_color == Color::Black && m_row == 1) ||
       (m_color == Color::White && m_row == (m_board.getNumRows() - 2));
+  ChessPiece *toPiece = m_board.getPiece(toRow, toColumn);
+  if (toPiece && toPiece->getColor() == m_color) {
+    // attacking same color
+    return false;
+  } else if (!toPiece && (toColumn != m_column)) {
+    // moving horiz without attacking
+    return false;
+  }
   if (canDoubleMove) {
     if (m_color == Color::Black) {
       return toColumn == m_column && (toRow == m_row + 2 || toRow == m_row + 1);
@@ -28,12 +36,10 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
       toRow == m_row + 1;
 
   if (m_color == Color::Black) {
-    bool out = (attacking && attackValidBlack) || nonAttackValidBlack;
-    attacking = false;
+    bool out = (toPiece && attackValidBlack) || nonAttackValidBlack;
     return out;
   } else {
-    bool out = (attacking && attackValidWhite) || nonAttackValidWhite;
-    attacking = false;
+    bool out = (toPiece && attackValidWhite) || nonAttackValidWhite;
     return out;
   }
 };

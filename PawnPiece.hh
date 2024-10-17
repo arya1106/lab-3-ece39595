@@ -17,9 +17,6 @@ public:
   }
 
 public:
-  bool attacking = false;
-
-public:
   bool canMoveToLocation(int toRow, int toColumn);
   const char *toString();
 };

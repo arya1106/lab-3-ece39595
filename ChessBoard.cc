@@ -42,19 +42,19 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow,
                              int toColumn) {
   ChessPiece *fromPiece = getPiece(fromRow, fromColumn);
-  ChessPiece *toPiece = getPiece(toRow, toColumn);
+  // ChessPiece *toPiece = getPiece(toRow, toColumn);
 
-  if (toPiece && (toPiece->getType() == Type::Pawn)) {
-    // special case for pawn attacking
-    ((PawnPiece *)toPiece)->attacking = true;
-    return fromPiece->canMoveToLocation(toRow, toColumn);
-  } else if (toPiece) {
-    // check to make sure you're not attacking your own pieces
-    return (!(toPiece->getColor() == fromPiece->getColor())) &&
-           (fromPiece->canMoveToLocation(toRow, toColumn));
-  } else {
-    return fromPiece->canMoveToLocation(toRow, toColumn);
-  }
+  // if (toPiece && (toPiece->getType() == Type::Pawn)) {
+  //   // special case for pawn attacking
+  //   ((PawnPiece *)toPiece)->attacking = true;
+  //   return fromPiece->canMoveToLocation(toRow, toColumn);
+  // } else if (toPiece) {
+  //   // check to make sure you're not attacking your own pieces
+  //   return (!(toPiece->getColor() == fromPiece->getColor())) &&
+  //          (fromPiece->canMoveToLocation(toRow, toColumn));
+  // } else {
+  return fromPiece->canMoveToLocation(toRow, toColumn);
+  // }
 }
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) { return false; }
