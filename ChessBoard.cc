@@ -44,7 +44,12 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
                            int toColumn) {
-  return true;
+  ChessPiece *fromPiece = getPiece(fromRow, fromColumn);
+  if (!fromPiece) {
+    return false;
+  }
+
+  return fromPiece->canMoveToLocation(toRow, toColumn);
 }
 
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow,
@@ -65,7 +70,18 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow,
   // }
 }
 
-bool ChessBoard::isPieceUnderThreat(int row, int column) { return false; }
+bool ChessBoard::isPieceUnderThreat(int row, int column) {
+  ChessPiece *defPiece = getPiece(row, column);
+  for (int rowToCheck = 0; rowToCheck < numRows; rowToCheck++) {
+    for (int colToCheck = 0; colToCheck < numCols; colToCheck++) {
+      ChessPiece *attackPiece = getPiece(rowToCheck, colToCheck);
+      if (pieceUnderThreatSingle(defPiece, attackPiece)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
 
 std::ostringstream ChessBoard::displayBoard() {
   std::ostringstream outputString;
@@ -98,4 +114,13 @@ std::ostringstream ChessBoard::displayBoard() {
   outputString << std::endl << std::endl;
 
   return outputString;
+}
+
+bool ChessBoard::pieceUnderThreatSingle(ChessPiece *defPiece,
+                                        ChessPiece *attackPiece) {
+  if ((!attackPiece) || attackPiece->getColor() == defPiece->getColor()) {
+    return false;
+  }
+  return attackPiece->canMoveToLocation(defPiece->getRow(),
+                                        defPiece->getColumn());
 }

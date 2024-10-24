@@ -131,6 +131,9 @@ public:
    * An output stream containing the full board layout.
    */
   std::ostringstream displayBoard();
+
+private:
+  bool pieceUnderThreatSingle(ChessPiece *defPiece, ChessPiece *attackPiece);
 };
 } // namespace Student
 
