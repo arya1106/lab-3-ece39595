@@ -45,11 +45,20 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
                            int toColumn) {
   ChessPiece *fromPiece = getPiece(fromRow, fromColumn);
-  if (!fromPiece) {
+  if (!fromPiece || !fromPiece->canMoveToLocation(toRow, toColumn)) {
     return false;
   }
 
-  return fromPiece->canMoveToLocation(toRow, toColumn);
+  ChessPiece *toPiece = getPiece(toRow, toColumn);
+  if (toPiece)
+  {
+    delete toPiece;
+  }
+
+  board[toRow][toColumn] = fromPiece;
+  board[fromRow][fromColumn] = NULL;
+  
+  return true;
 }
 
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow,
