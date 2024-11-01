@@ -56,6 +56,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
   }
 
   board[toRow][toColumn] = fromPiece;
+  fromPiece->setPosition(toRow, toColumn);
   board[fromRow][fromColumn] = NULL;
   
   return true;
