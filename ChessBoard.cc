@@ -80,12 +80,13 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow,
 }
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
-  ChessPiece *defPiece = getPiece(row, column);
-  for (int rowToCheck = 0; rowToCheck < numRows; rowToCheck++) {
-    for (int colToCheck = 0; colToCheck < numCols; colToCheck++) {
-      ChessPiece *attackPiece = getPiece(rowToCheck, colToCheck);
-      if (pieceUnderThreatSingle(defPiece, attackPiece)) {
-        return true;
+  if (ChessPiece *defPiece = getPiece(row, column)) {
+    for (int rowToCheck = 0; rowToCheck < numRows; rowToCheck++) {
+      for (int colToCheck = 0; colToCheck < numCols; colToCheck++) {
+        ChessPiece *attackPiece = getPiece(rowToCheck, colToCheck);
+        if (pieceUnderThreatSingle(defPiece, attackPiece)) {
+          return true;
+        }
       }
     }
   }
