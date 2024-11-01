@@ -7,6 +7,7 @@
 #include "RookPiece.hh"
 #include <algorithm>
 #include <vector>
+#include <iostream>
 
 using Student::ChessBoard;
 
@@ -44,8 +45,10 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
                            int toColumn) {
+  // std::cout << displayBoard().str() << std::endl;
+  // std::cout << "movePiece " << fromRow << "" << fromColumn << "" << toRow << "" << toColumn << "" << std::endl;
   ChessPiece *fromPiece = getPiece(fromRow, fromColumn);
-  if (!fromPiece || !fromPiece->canMoveToLocation(toRow, toColumn)) {
+  if (!fromPiece || !fromPiece->canMoveToLocation(toRow, toColumn) || fromPiece->getColor() != turn) {
     return false;
   }
 
@@ -58,6 +61,16 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
   board[toRow][toColumn] = fromPiece;
   fromPiece->setPosition(toRow, toColumn);
   board[fromRow][fromColumn] = NULL;
+
+  if (turn == White)
+  {
+    turn = Black;
+  }
+  else
+  {
+    turn = White;
+  }
+  
   
   return true;
 }
