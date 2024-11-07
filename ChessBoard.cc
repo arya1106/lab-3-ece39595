@@ -62,6 +62,14 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
   fromPiece->setPosition(toRow, toColumn);
   board[fromRow][fromColumn] = NULL;
 
+  for (KingPiece* i : kings)
+  {
+    if (i->getColor() == turn && isPieceUnderThreat(toRow, toColumn)) {
+      movePiece(toRow, toColumn, fromRow, fromColumn);
+      return false;
+    }
+  }
+
   if (turn == White)
   {
     turn = Black;
@@ -70,7 +78,6 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
   {
     turn = White;
   }
-  
   
   return true;
 }

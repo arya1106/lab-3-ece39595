@@ -8,15 +8,17 @@
  * The class is defined within the Student namespace.
  */
 namespace Student {
-class KingPiece : public ChessPiece {
 
+class KingPiece : public ChessPiece {
 public:
-  KingPiece(ChessBoard &board, Color color, int row, int column)
-      : ChessPiece(board, color, row, column) {}
+  KingPiece(ChessBoard &board, Color color, int row, int column);
 
   const char *toString();
   bool canMoveToLocation(int toRow, int toColumn);
+  ~KingPiece();
 };
 } // namespace Student
+
+#include "ChessPiece.hh"
 
 #endif

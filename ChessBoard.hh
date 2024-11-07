@@ -8,8 +8,12 @@
 #include <vector>
 
 namespace Student {
+
+class KingPiece;
+
 class ChessBoard {
 public:
+  std::vector<KingPiece *> kings = {};
   int numRows = 0;
   int numCols = 0;
   Color turn = White;
@@ -136,5 +140,7 @@ private:
   bool pieceUnderThreatSingle(ChessPiece *defPiece, ChessPiece *attackPiece);
 };
 } // namespace Student
+
+#include "KingPiece.hh"
 
 #endif

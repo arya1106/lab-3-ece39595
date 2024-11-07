@@ -100,4 +100,6 @@ public:
 };
 } // namespace Student
 
+#include "ChessBoard.hh"
+
 #endif
