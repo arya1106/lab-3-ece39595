@@ -5,6 +5,7 @@ namespace Student {
 
 KingPiece::KingPiece(ChessBoard &board, Color color, int row, int column)
       : ChessPiece(board, color, row, column) {
+        m_type = Type::King;
         board.kings.emplace_back(this);
       }
 

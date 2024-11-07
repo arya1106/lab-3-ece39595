@@ -12,8 +12,9 @@
 using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol)
-    : numRows(numRow), numCols(numCol),
-      board(numRows, std::vector<ChessPiece *>(numCol, nullptr)) {}
+    : kings({}), numRows(numRow), numCols(numCol),
+      board(numRows, std::vector<ChessPiece *>(numCol, nullptr)) {
+      }
 
 ChessBoard::~ChessBoard() {
   std::for_each(board.begin(), board.end(), [](std::vector<ChessPiece *> &row) {
@@ -47,27 +48,21 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow,
                            int toColumn) {
   // std::cout << displayBoard().str() << std::endl;
   // std::cout << "movePiece " << fromRow << "" << fromColumn << "" << toRow << "" << toColumn << "" << std::endl;
-  ChessPiece *fromPiece = getPiece(fromRow, fromColumn);
-  if (!fromPiece || !fromPiece->canMoveToLocation(toRow, toColumn) || fromPiece->getColor() != turn) {
+  if (!isValidMove(fromRow, fromColumn, toRow, toColumn)) {
     return false;
   }
 
+  ChessPiece *fromPiece = getPiece(fromRow, fromColumn);
+
   ChessPiece *toPiece = getPiece(toRow, toColumn);
-  if (toPiece)
-  {
-    delete toPiece;
-  }
 
   board[toRow][toColumn] = fromPiece;
   fromPiece->setPosition(toRow, toColumn);
   board[fromRow][fromColumn] = NULL;
 
-  for (KingPiece* i : kings)
+  if (toPiece)
   {
-    if (i->getColor() == turn && isPieceUnderThreat(toRow, toColumn)) {
-      movePiece(toRow, toColumn, fromRow, fromColumn);
-      return false;
-    }
+    delete toPiece;
   }
 
   if (turn == White)
@@ -96,7 +91,30 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow,
   //   return (!(toPiece->getColor() == fromPiece->getColor())) &&
   //          (fromPiece->canMoveToLocation(toRow, toColumn));
   // } else {
-  return fromPiece->canMoveToLocation(toRow, toColumn);
+  if (!fromPiece || !fromPiece->canMoveToLocation(toRow, toColumn) || fromPiece->getColor() != turn) {
+    return false;
+  }
+
+  ChessPiece *toPiece = getPiece(toRow, toColumn);
+
+  board[toRow][toColumn] = fromPiece;
+  fromPiece->setPosition(toRow, toColumn);
+  board[fromRow][fromColumn] = NULL;
+
+  for (KingPiece* i : kings)
+  {
+    if (i->getColor() == turn && isPieceUnderThreat(i->getRow(), i->getColumn())) {
+      board[toRow][toColumn] = toPiece;
+      fromPiece->setPosition(fromRow, fromColumn);
+      board[fromRow][fromColumn] = fromPiece;
+      return false;
+    }
+  }
+
+  board[toRow][toColumn] = toPiece;
+  fromPiece->setPosition(fromRow, fromColumn);
+  board[fromRow][fromColumn] = fromPiece; 
+  return true;
   // }
 }
 

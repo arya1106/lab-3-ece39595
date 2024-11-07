@@ -13,7 +13,7 @@ class KingPiece;
 
 class ChessBoard {
 public:
-  std::vector<KingPiece *> kings = {};
+  std::vector<KingPiece *> kings;
   int numRows = 0;
   int numCols = 0;
   Color turn = White;

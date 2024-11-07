@@ -7,6 +7,9 @@
 namespace Student {
 
 bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
+  if (toRow == m_row && toColumn == m_column) {
+    return false;
+  }
   bool canDoubleMove =
       (m_color == Color::Black && m_row == 1) ||
       (m_color == Color::White && m_row == (m_board.getNumRows() - 2));

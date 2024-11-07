@@ -2,6 +2,7 @@
 #define __KINGPIECE_H__
 
 #include "ChessPiece.hh"
+#include <algorithm>
 
 /**
  * Student implementation of a King chess piece.
