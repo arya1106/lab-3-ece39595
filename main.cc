@@ -253,7 +253,7 @@ void test1() {
 }
 
 void test2() {
-  Student::ChessBoard sBoard(4, 4);
+  Student::ChessBoard sBoard(8, 8);
   sBoard.createChessPiece(Black, Rook, 3, 0);
   sBoard.createChessPiece(Black, Rook, 3, 5);
   sBoard.createChessPiece(Black, Pawn, 5, 3);

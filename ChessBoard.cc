@@ -24,6 +24,9 @@ ChessBoard::~ChessBoard() {
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow,
                                   int startColumn) {
+  if (board.at(startRow).at(startColumn)) {
+    delete board[startRow][startColumn];
+  }
   switch (ty) {
   case Pawn:
     board.at(startRow).at(startColumn) =

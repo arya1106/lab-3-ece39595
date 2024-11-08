@@ -2,6 +2,7 @@
 #define _CHESSPIECE_H__
 
 #include "Chess.h"
+#include <iostream>
 
 namespace Student {
 class ChessBoard;
@@ -35,7 +36,9 @@ public:
    * Default destructor for ChessPiece.
    * Does nothing special.
    */
-  virtual ~ChessPiece() {}
+  virtual ~ChessPiece() {
+    // std::cout << m_color << "" << m_type << std::endl;
+  }
 
   /**
    * @return
